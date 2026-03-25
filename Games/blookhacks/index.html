@@ -12,6 +12,24 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
+body {
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+
+#loginScreen {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #020617;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+}
+
 
 
 .window{
@@ -71,7 +89,7 @@
     text-shadow: 1px 1px 0 #0a2a95;
   }
 
-  p{
+  h2{
     line-height: 32px;
     height:30px;
     position:relative;
@@ -128,24 +146,6 @@
     }
   }
     
-}
-
-body {
-    background: #0f172a;
-    color: white;
-    text-align: center;
-}
-
-#loginScreen {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #020617;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 999;
 }
 
 .login-box {
@@ -275,61 +275,42 @@ footer {
 </header>
 
 <section class="games-container">
+    <a href="./copytoconsole.txt" target="_blank">
+      <button class="fancy-button">some scripts</button>
+    </a>
 
-    <div class="game-card" onclick="window.location.href='./Games/Minecraft/1.8.html'">
-        <img src="https://imgs.search.brave.com/9YuEZ4MZ2Worbo1zJGCsCNvTccs0CqeyDTNM4Ms3fyA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMjY5OS9Q/TkcvNTEyL21pbmVj/cmFmdF9sb2dvX2lj/b25fMTY4OTc0LnBu/Zw">
-        <h2>Minecraft</h2>
-    </div>
+<style>
+.fancy-button {
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  padding: 15px 32px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-    <div class="game-card" onclick="window.location.href='./Games/2048/2048.html'">
-        <img src="https://imgs.search.brave.com/jyype7A6NfZTkHlzfRTVSXBGunCoP11-afZtWao6UZo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hcGku/cmF6emxlcHV6emxl/cy5jb20vcHVibGlj/L2ltYWdlcy8yMDQ4/LnBuZw">
-        <h2>2048</h2>
-    </div>
+.fancy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #2575fc, #6a11cb);
+}
 
-    <div class="game-card" onclick="window.location.href='./Games/Snake/Snake.html'">
-        <img src="https://imgs.search.brave.com/ym8_7-QBlGcYyynRhbYd9jhU3a6tlvSZZgoLW0JueCc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly92ZWN0/b3JpZmllZC5jb20v/aW1hZ2VzL3NuYWtl/LWdhbWUtaWNvbi02/LnBuZw">
-        <h2>Snake</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/Tetris/Tetris.html'">
-        <img src="https://play-lh.googleusercontent.com/7Zn2QBzByBf4XyQPhuRVsOkSaKSYsty1ka-6_bh6Ub-2kQri6xqqRdK52qxEM69N6cw">
-        <h2>Tetris</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/Mario/Mario.html'">
-        <img src="https://m.media-amazon.com/images/I/71OWWCZNouL._AC_UF894,1000_QL80_.jpg">
-        <h2>Mario</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/CookieClicker/CookieClicker.html'">
-        <img src="https://play-lh.googleusercontent.com/OssE3ON9WsLZedOF39UCgtIHcRYfV0OqQS9O78LfmRdxSyKdHX52G2OFa0LkG6D-k9w">
-        <h2>Cookie Clicker</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/Emulation/WebRetro.html'">
-        <img src="https://play-lh.googleusercontent.com/bWf-MxH7kV88rrx27MgFB24V8gHd1C3s1ojYq4viPFtMOdtMy60PKVAkh69LLns6c4s">
-        <h2>Retro Emulator</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/Ruffle/Ruffle.html'">
-        <img src="https://brandeps.com/logo-download/A/Adobe-Flash-Player-logo-vector-01.svg">
-        <h2>Flash Games</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/fnae/index.html'">
-        <img src="https://imgs.search.brave.com/LL7jCj0bqpXHNU4hQa5xve64YgJpjDrgfsklVMbFayY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/aXRjaC56b25lL2FX/MW5MekkyTXpFd05E/YzJMbkJ1Wnc9PS9v/cmlnaW5hbC9hQUl3/SUMucG5n">
-        <h2>FNAE</h2>
-    </div>
-
-    <div class="game-card" onclick="window.location.href='./Games/driftboss/index.html'">
-        <img src="https://imgs.search.brave.com/fq2e-BWbuSPkx5xBUpaTdlSCjnsz_2AasixCqNkETKc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9nYW1l/Zm9yZ2UuY29tL2Rl/LURFL2xpdHRsZWdh/bWVzL2luY2x1ZGVz/L2ltYWdlcy9nYW1l/cy81MDY0XzVlYjNl/NWYyODU4OGIuanBn">
-        <h2>Drift Boss for lunch</h2>
-    </div>
+.fancy-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+</style>   
 
 </section>
 
 <footer>
-    <h2>made by kordek</h2>
+    <p>made by kordek</p>
 </footer>
 
 </div>
@@ -338,7 +319,7 @@ footer {
 function checkPassword() {
     const password = document.getElementById("passwordInput").value;
 
-    if (password === "soyesverynice") { // CHANGE PASSWORD HERE
+    if (password === "secret90") { // CHANGE PASSWORD HERE
         document.getElementById("loginScreen").style.display = "none";
         document.getElementById("mainSite").style.display = "block";
     } else {
