@@ -275,6 +275,70 @@ footer {
     font-size: 0.82rem;
     opacity: 0.55;
 }
+
+/* VIDEOS */
+.videos-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 20px;
+}
+
+.videos-section h2 {
+    text-align: left;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0 0 14px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    padding: 0 40px 40px;
+}
+
+.video-card {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.video-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    opacity: 0.95;
+    font-weight: 700;
+}
+
+/* Same footprint as .game-card images until user hits fullscreen on the player */
+.video-card video {
+    width: 100%;
+    height: 120px;
+    max-height: 120px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #000;
+    display: block;
+}
+
+.video-card video:-webkit-full-screen,
+.video-card video:fullscreen {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+}
+
+.video-help {
+    margin-top: 14px;
+    opacity: 0.7;
+    text-align: left;
+    font-size: 0.9rem;
+}
 </style>
 <script src="webhook-notify.js"></script>
 
@@ -299,6 +363,7 @@ footer {
     <a class="nav-title" href="./index.html">oblivion-893.github.io</a>
     <div class="nav-tabs">
         <a class="nav-tab" data-page="games" href="#games">Games</a>
+        <a class="nav-tab" data-page="videos" href="#videos">Videos</a>
         <a class="nav-tab" data-page="updates" href="#updates">Updates</a>
     </div>
 </nav>
@@ -370,8 +435,32 @@ footer {
             <img class="wa-avatar" src="./assets/pics/sigma.jpg" alt="Profile picture">
             <div class="wa-body">
                 <div class="wa-name">kordek</div>
-                <div class="wa-bubble">added navbar, removed and added some games, new ui lmk any games or tweaks you want added and ill think about them.</div>
+                <div class="wa-bubble">Navbar, videos, more games and more updates to come. LMK if you want any specific games or tweaks.</div>
                 <div class="wa-meta">27/03/26</div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<section class="page" id="page-videos" data-page="videos">
+    <section class="videos-section">
+
+        <div class="video-grid">
+            <!-- Put your local .mp4 files in ./videos/ and duplicate these cards as needed -->
+            <div class="video-card">
+                <h3>Get him, he's getting away! Very nice.</h3>
+                <video controls playsinline preload="metadata">
+                    <source src="./videos/nice.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="video-card">
+                <h3>What do you mean i call him yeah?</h3>
+                <video controls playsinline preload="metadata">
+                    <source src="./videos/ye.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </section>
@@ -383,10 +472,11 @@ footer {
 function setActivePage(page) {
     const gamesPage = document.getElementById("page-games");
     const updatesPage = document.getElementById("page-updates");
+    const videosPage = document.getElementById("page-videos");
 
-    const isUpdates = page === "updates";
-    gamesPage.classList.toggle("active", !isUpdates);
-    updatesPage.classList.toggle("active", isUpdates);
+    gamesPage.classList.toggle("active", page === "games");
+    videosPage.classList.toggle("active", page === "videos");
+    updatesPage.classList.toggle("active", page === "updates");
 
     document.querySelectorAll(".nav-tab").forEach((tab) => {
         tab.classList.toggle("active", tab.dataset.page === page);
@@ -395,7 +485,9 @@ function setActivePage(page) {
 
 function pageFromHash() {
     const h = (window.location.hash || "").toLowerCase();
-    return h === "#updates" ? "updates" : "games";
+    if (h === "#updates") return "updates";
+    if (h === "#videos") return "videos";
+    return "games";
 }
 
 function checkPassword() {
