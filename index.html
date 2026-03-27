@@ -19,6 +19,69 @@ body {
     min-height: 100vh;
 }
 
+/* TOP NAV */
+.top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 22px;
+    background: rgba(2, 6, 23, 0.7);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-title {
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    color: white;
+    opacity: 0.92;
+    font-size: 1.05rem;
+}
+
+.nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-tab {
+    padding: 9px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.86);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.2s ease;
+    font-weight: 600;
+}
+
+.nav-tab:hover {
+    transform: translateY(-1px);
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(56,189,248,0.35);
+}
+
+.nav-tab.active {
+    color: #001018;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    border-color: rgba(56,189,248,0.0);
+    box-shadow: 0 10px 24px rgba(56,189,248,0.18);
+}
+
+/* PAGES */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
 /* LOGIN SCREEN */
 #loginScreen {
     position: fixed;
@@ -85,7 +148,7 @@ body {
 }
 
 .hero {
-    padding: 70px 20px 30px;
+    padding: 55px 20px 30px;
 }
 
 .rainbow {
@@ -93,6 +156,7 @@ body {
     font-weight: bold;
     background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
     background-size: 400%;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbowMove 8s linear infinite;
@@ -147,6 +211,70 @@ footer {
     margin: 40px 0;
     opacity: 0.6;
 }
+
+/* ANNOUNCEMENTS (WHATSAPP-LIKE CARD) */
+.announcements {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 30px 20px 10px;
+}
+
+.announcements h2 {
+    text-align: left;
+    font-size: 1.1rem;
+    opacity: 0.85;
+    margin: 0 0 12px;
+}
+
+.wa-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 14px 12px;
+    background: rgba(30, 41, 59, 0.55);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 18px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+.wa-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.16);
+    flex: 0 0 44px;
+}
+
+.wa-body {
+    flex: 1;
+    text-align: left;
+}
+
+.wa-name {
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    margin: 0 0 4px;
+    opacity: 0.95;
+}
+
+.wa-bubble {
+    display: inline-block;
+    max-width: 100%;
+    padding: 10px 12px;
+    border-radius: 14px 14px 14px 6px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    line-height: 1.35;
+    color: rgba(255,255,255,0.9);
+}
+
+.wa-meta {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    opacity: 0.55;
+}
 </style>
 
 </head>
@@ -155,8 +283,8 @@ footer {
 
 <div id="loginScreen">
     <div class="login-box">
-        <h2>password nice</h2>
-        <input type="password" id="passwordInput" placeholder="password">
+        <h2>access code</h2>
+        <input type="password" id="passwordInput" placeholder="7-character code">
         <br>
         <button onclick="checkPassword()">enter</button>
         <p id="error"></p>
@@ -166,25 +294,34 @@ footer {
 <!-- MAIN SITE -->
 <div id="mainSite">
 
-<header class="hero">
-    <h1 class="rainbow">oblivion-893.github.io</h1>
-</header>
+<nav class="top-nav">
+    <a class="nav-title" href="./index.html">oblivion-893.github.io</a>
+    <div class="nav-tabs">
+        <a class="nav-tab" data-page="games" href="#games">Games</a>
+        <a class="nav-tab" data-page="updates" href="#updates">Updates</a>
+    </div>
+</nav>
 
-<section class="games-container">
+<section class="page active" id="page-games" data-page="games">
+    <header class="hero">
+        <h1 class="rainbow">Games</h1>
+    </header>
 
-    <div class="game-card" onclick="window.location.href='./Games/Minecraft/1.8.html'">
-        <img src="https://imgs.search.brave.com/9YuEZ4MZ2Worbo1zJGCsCNvTccs0CqeyDTNM4Ms3fyA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuaWNvbi1pY29u/cy5jb20vMjY5OS9Q/TkcvNTEyL21pbmVj/cmFmdF9sb2dvX2lj/b25fMTY4OTc0LnBu/Zw">
+    <section class="games-container">
+
+    <div class="game-card" onclick="window.location.href='./Games/Minecraft/'">
+        <img src="https://cdn2.steamgriddb.com/icon_thumb/198271ab5e4be000a01629484af17363.png">
         <h2>Minecraft</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/2048/2048.html'">
-        <img src="https://imgs.search.brave.com/jyype7A6NfZTkHlzfRTVSXBGunCoP11-afZtWao6UZo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hcGku/cmF6emxlcHV6emxl/cy5jb20vcHVibGlj/L2ltYWdlcy8yMDQ4/LnBuZw">
+    <div class="game-card" onclick="window.location.href='./Games/2048/'">
+        <img src="https://2048.gg/assets/img/2048-game.png">
         <h2>2048</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/Snake/Snake.html'">
+    <div class="game-card" onclick="window.location.href='./Games/Snake/'">
         <img src="https://imgs.search.brave.com/ym8_7-QBlGcYyynRhbYd9jhU3a6tlvSZZgoLW0JueCc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly92ZWN0/b3JpZmllZC5jb20v/aW1hZ2VzL3NuYWtl/LWdhbWUtaWNvbi02/LnBuZw">
-        <h2>Snake</h2>
+        <h2>Google Snake</h2>
     </div>
 
     <div class="game-card" onclick="window.location.href='./Games/Tetris/Tetris.html'">
@@ -192,57 +329,128 @@ footer {
         <h2>Tetris</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/Mario/Mario.html'">
-        <img src="https://m.media-amazon.com/images/I/71OWWCZNouL._AC_UF894,1000_QL80_.jpg">
-        <h2>Mario</h2>
-    </div>
-
     <div class="game-card" onclick="window.location.href='./Games/CookieClicker/CookieClicker.html'">
         <img src="https://play-lh.googleusercontent.com/OssE3ON9WsLZedOF39UCgtIHcRYfV0OqQS9O78LfmRdxSyKdHX52G2OFa0LkG6D-k9w">
         <h2>Cookie Clicker</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/Emulation/WebRetro.html'">
-        <img src="https://play-lh.googleusercontent.com/bWf-MxH7kV88rrx27MgFB24V8gHd1C3s1ojYq4viPFtMOdtMy60PKVAkh69LLns6c4s">
-        <h2>Retro Emulator</h2>
+    <div class="game-card" onclick="window.location.href='./Games/driftboss/'">
+        <img src="https://img-cdn.heygame.io/gameimages/5d5939ef-9c49-4b01-87fc-575f88cfd79c-Drift%20Boss.webp">
+        <h2>Drift Boss</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/Ruffle/Ruffle.html'">
-        <img src="https://brandeps.com/logo-download/A/Adobe-Flash-Player-logo-vector-01.svg">
-        <h2>Flash Games</h2>
+    <div class="game-card" onclick="window.location.href='./Games/Territorial.io/'">
+        <img src="https://static.wikia.nocookie.net/territorial/images/e/e6/Site-logo.png/revision/latest?cb=20230727171424">
+        <h2>Territorial.io</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/fnae/index.html'">
-        <img src="https://imgs.search.brave.com/LL7jCj0bqpXHNU4hQa5xve64YgJpjDrgfsklVMbFayY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/aXRjaC56b25lL2FX/MW5MekkyTXpFd05E/YzJMbkJ1Wnc9PS9v/cmlnaW5hbC9hQUl3/SUMucG5n">
-        <h2>FNAE</h2>
+    <div class="game-card" onclick="window.location.href='./Games/Geometrydash/'">
+        <img src="https://th.bing.com/th/id/R.67dcf797f79315589cc8b18f502f93f5?rik=A7ss82CSOJPrkg&riu=http%3a%2f%2fvignette2.wikia.nocookie.net%2fgeometry-dash%2fimages%2f9%2f90%2fGeometryDash.png%2frevision%2flatest%3fcb%3d20160224042843&ehk=Hvk2rFdCmF08iQinZYieMsLbvo4NDNdKYic8xB6GqZE%3d&risl=&pid=ImgRaw&r=0">
+        <h2>Geometry Dash</h2>
     </div>
 
-    <div class="game-card" onclick="window.location.href='./Games/driftboss/index.html'">
-        <img src="https://imgs.search.brave.com/fq2e-BWbuSPkx5xBUpaTdlSCjnsz_2AasixCqNkETKc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9nYW1l/Zm9yZ2UuY29tL2Rl/LURFL2xpdHRsZWdh/bWVzL2luY2x1ZGVz/L2ltYWdlcy9nYW1l/cy81MDY0XzVlYjNl/NWYyODU4OGIuanBn">
-        <h2>Drift Boss for lunch</h2>
-    </div>
-
+    </section>
 </section>
 
-<footer>
-    <p>made by kordek</p>
-</footer>
+<section class="page" id="page-updates" data-page="updates">
+    <section class="announcements" id="announcements">
+
+        <div class="wa-card">
+            <img class="wa-avatar" src="./assets/pics/sigma.jpg" alt="Profile picture">
+            <div class="wa-body">
+                <div class="wa-name">kordek</div>
+                <div class="wa-bubble">added navbar, removed and added some games, new ui lmk any games or tweaks you want added and ill think about them.</div>
+                <div class="wa-meta">27/03/26</div>
+            </div>
+        </div>
+    </section>
+</section>
 
 </div>
 
 <script>
+function setActivePage(page) {
+    const gamesPage = document.getElementById("page-games");
+    const updatesPage = document.getElementById("page-updates");
+
+    const isUpdates = page === "updates";
+    gamesPage.classList.toggle("active", !isUpdates);
+    updatesPage.classList.toggle("active", isUpdates);
+
+    document.querySelectorAll(".nav-tab").forEach((tab) => {
+        tab.classList.toggle("active", tab.dataset.page === page);
+    });
+}
+
+function pageFromHash() {
+    const h = (window.location.hash || "").toLowerCase();
+    return h === "#updates" ? "updates" : "games";
+}
+
 function checkPassword() {
     const input = document.getElementById("passwordInput").value;
-    const encodedInput = btoa(input);
-    const correct = "c295ZXN2ZXJ5bmljZQ==";
+    const accessCodes = [
+        "Q7M4X2P",
+        "N8K1V5R",
+        "T3B9L6W",
+        "H2D7S4Y",
+        "P6J8C1N",
+        "R5F2Z9K",
+        "V1G7M3T",
+        "X4Q8H6B",
+        "L9W2P5D",
+        "C3Y7R1F"
+    ];
+    const normalizedInput = String(input || "").trim().toUpperCase();
 
-    if (encodedInput === correct) {
+    if (accessCodes.includes(normalizedInput)) {
+        localStorage.setItem("kneeAccessGranted", "1");
+        localStorage.setItem("kneeAccessCode", normalizedInput);
+
+        const webhookUrl = "PASTE_YOUR_WEBHOOK_URL_HERE";
+        const sendWebhookNotice = async () => {
+            if (!webhookUrl || webhookUrl.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) return;
+            let ip = "unknown";
+            try {
+                const ipRes = await fetch("https://api.ipify.org?format=json");
+                const ipData = await ipRes.json();
+                if (ipData && ipData.ip) ip = ipData.ip;
+            } catch (e) {
+                // Keep access working even if IP lookup fails.
+            }
+
+            try {
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        content:
+                            "Access granted on homepage\n" +
+                            "Code: " + normalizedInput + "\n" +
+                            "IP: " + ip + "\n" +
+                            "Page: " + window.location.href + "\n" +
+                            "User-Agent: " + navigator.userAgent
+                    })
+                });
+            } catch (e) {
+                // Ignore webhook failures so login never breaks.
+            }
+        };
+
+        sendWebhookNotice();
         document.getElementById("loginScreen").style.display = "none";
         document.getElementById("mainSite").style.display = "block";
+        setActivePage(pageFromHash());
     } else {
-        document.getElementById("error").innerText = "wrong";
+        document.getElementById("error").innerText = "wrong access code";
     }
 }
+
+window.addEventListener("hashchange", () => {
+    if (document.getElementById("mainSite").style.display === "block") {
+        setActivePage(pageFromHash());
+    }
+});
 </script>
 
 </body>
