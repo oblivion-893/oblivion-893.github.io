@@ -276,6 +276,7 @@ footer {
     opacity: 0.55;
 }
 </style>
+<script src="webhook-notify.js"></script>
 
 </head>
 
@@ -407,9 +408,7 @@ function checkPassword() {
         localStorage.setItem("kneeAccessGranted", "1");
         localStorage.setItem("kneeAccessCode", normalizedInput);
 
-        const webhookUrl = "PASTE_YOUR_WEBHOOK_URL_HERE";
         const sendWebhookNotice = async () => {
-            if (!webhookUrl || webhookUrl.includes("PASTE_YOUR_WEBHOOK_URL_HERE")) return;
             let ip = "unknown";
             try {
                 const ipRes = await fetch("https://api.ipify.org?format=json");
@@ -418,22 +417,14 @@ function checkPassword() {
             } catch (e) {
                 // Keep access working even if IP lookup fails.
             }
-
-            try {
-                await fetch(webhookUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        content:
-                            "Access granted on homepage\n" +
-                            "Code: " + normalizedInput + "\n" +
-                            "IP: " + ip + "\n" +
-                            "Page: " + window.location.href + "\n" +
-                            "User-Agent: " + navigator.userAgent
-                    })
+            if (typeof kneeNotifyAccess === "function") {
+                await kneeNotifyAccess({
+                    source: "Homepage",
+                    code: normalizedInput,
+                    ip: ip,
+                    page: window.location.href,
+                    userAgent: navigator.userAgent
                 });
-            } catch (e) {
-                // Ignore webhook failures so login never breaks.
             }
         };
 
